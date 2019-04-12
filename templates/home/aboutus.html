@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<title>About Us</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% load  static %}
+<link rel="stylesheet" href="{% static 'css/w3.css' %}">
+<link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    body, h1, h2, h3, h4, h5, h6 {
+        font-family: "Raleway", Arial, Helvetica, sans-serif
+    }
+
+    .myLink {
+        display: none
+    }
+
+    #about_content {
+        width: 60%;
+        padding: 0px 20px 20px 20px;
+        text-align: center;
+        margin: auto;
+    }
+
+    #about-container h1 {
+        text-align: center;
+        width: 100%;
+        padding-top: 10px;
+        margin-top: 0px;
+    }
+
+    #about-container h2 {
+        text-align: center;
+        font-size: 20px;
+        width: 100%;
+    }
+
+    .setCenter {
+        margin: auto;
+        width: 50%;
+        text-align: center;
+    }
+</style>
+<body class="w3-light-grey">
+
+
+<!-- Navigation Bar -->
+<div class="w3-bar w3-white w3-border-bottom w3-large">
+    <div class="left-menu">
+
+
+        <div class="left-menu setImg">
+            <img class="w3-image" src="{% static 'images/logo.png' %}">
+        </div>
+        <a href="{% url 'home' %}" class="w3-bar-item w3-button w3-mobile w3-padd">Home</a>
+        <a href="{% url 'searchProperty' %}" class="w3-bar-item w3-button w3-mobile  w3-padd">Search Property</a>
+        <a href="{% url 'advertiseProperty' %}" class="w3-bar-item w3-button w3-mobile  w3-padd">Advertise Property</a>
+        <a href="{% url 'contact' %}" class="w3-bar-item w3-button w3-mobile  w3-padd">Contact Us</a>
+        <a href="{% url 'aboutus' %}" class="w3-bar-item w3-button w3-mobile  w3-padd">About Us</a>
+    </div>
+    <div class="right-menu">
+        <a href="{% url 'signin' %}" class="w3-bar-item w3-button w3-light-grey w3-mobile w3-padd">SignIn/Register</a>
+    </div>
+</div>
+<!-- Page content -->
+<!-- Page content -->
+<div id="about-container">
+
+    <!-- Explore Nature -->
+    <div>
+        <div class="ourStory">
+            <h1>Our Story</h1>
+        </div>
+        <div class="setCenter">
+            <h2>We marry the ease and intelligence of technology with a full-service real estate team, to create a
+                seamless experience.</h2>
+        </div>
+        <div id="about_content">
+            <p>
+
+                Realty Trader is the most popular and most trusted real estate website in Canada. Owned and operated by
+                the Realty Trader. Realty Trader provides up-to-date and reliable information that makes finding your
+                dream property easy and enjoyable. Realty Trader is popular with sellers, buyers, and renters and is
+                accessible online and on mobile devices.
+                We believe that when it comes to finding a home what's outside the front door is just as important as
+                what's behind it.
+                Realty Trader provides listing information for residential, commercial and rental properties across
+                Canada. We're committed to helping them discover a place where they will love to live and where they
+                will feel more connected to the community and to each other. Whether you have just started looking or
+                you are ready to make that big purchase, Realty Trader is updated daily to ensure you have access to the
+                latest and most accurate property listings.
+                Start your search today!!
+            </p>
+        </div>
+
+
+    </div>
+
+    <!-- End page content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-center w3-opacity w3-margin-bottom">
+    <h5>Find Us On</h5>
+    <div class="w3-xlarge w3-padding-16">
+        <i class="fa fa-facebook-official w3-hover-opacity"></i>
+        <i class="fa fa-instagram w3-hover-opacity"></i>
+        <i class="fa fa-snapchat w3-hover-opacity"></i>
+        <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+        <i class="fa fa-twitter w3-hover-opacity"></i>
+        <i class="fa fa-linkedin w3-hover-opacity"></i>
+    </div>
+    </p>
+</footer>
+
+</body>
+</html>

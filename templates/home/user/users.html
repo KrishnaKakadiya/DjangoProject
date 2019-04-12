@@ -1,0 +1,144 @@
+{% extends 'home/user/userBase.html' %}
+
+{% block user %}
+
+<section class="content-header">
+        <h3>Manage Users</h3>
+
+        {% comment %}<ol class="breadcrumb">
+        <li><a href="{% url 'users'%}"><i class="fa fa-home"></i> Home</a></li> /
+        <li><a href="#">Manage Users</a></li>
+      </ol>{% endcomment %}
+<a href="{% url 'add-user' %}" class="btn btn-success"><i class="fa fa-plus"></i> Add New</a>
+    </section>
+    <section class="content">
+        <div class="box">
+            {% if not users %}
+            <div class="row">
+                <div class="no-data">
+                    <span><i class="fa fa-user"></i> <br/>  No user data available!</span>
+                </div>
+            </div>
+            {% endif %}
+            {% if users %}
+            <div class="row">
+                <table class="table table-hover table-bordered whiteBg">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Enable/Disable Account</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr scope="row">
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.firstName }}
+                                {% if user.isActive %}
+                                    <button class="btn-success">Active</button>
+                                {% else %}
+                                    <button class="btn-danger">Disabled</button>
+                                {% endif %}
+                            </td>
+                            <td>{{ user.lastName }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                {% for role in user.roles.all %}
+                                    <span class="badge" style="font-size: 12px">{{ role }}</span>
+                                {% endfor %}
+                             </td>
+                            <td>
+                                <form action="/users/activate/" method="post">
+                                    {% csrf_token %}
+                                    {% if user.isActive %}
+                                        <input type="hidden" value="{{ user.id }}" name="user_id"/>
+                                        <input type="hidden" value="0" name="status" />
+                                        <button class="btn btn-danger">Disable</button>
+                                    {% else %}
+                                        <input type="hidden" value="{{ user.id }}" name="user_id"/>
+                                        <input type="hidden" value="1" name="status">
+                                        <button class="btn btn-success">Enable</button>
+                                    {% endif %}
+                                </form>
+                            </td>
+                            <td>
+                                <ul class="table-actions">
+                                    <li><a href="edit/{{ user.id }}"><i class="fa fa-edit"></i></a></li>
+                                    {# <li><a href="delete/{{ user.id }}"><i class="fa fa-trash"></i></a></li> #}
+                                    <li><a style="cursor: pointer;"><i class="fa fa-trash" id="deleteButton" onclick="openForm(event);" data-url="{% url 'user-delete' user.id %}"></i></a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+        </div>
+        {% if users %}
+        <div class="row">
+            <div class="pagination">
+                <span class="step-links">
+                    {% if users.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ users.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ users.number }} of {{ users.paginator.num_pages }}
+                    </span>
+
+                    {% if properties.has_next %}
+                        <a href="?page={{ users.next_page_number }}">next</a>
+                        <a href="?page={{ users.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+        {% endif %}
+    </section>
+
+    <div class="modal" id="myForm" role="dialog" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete User</h4>
+                    <button type="button" class="close" data-dismiss="modal" onclick="closeForm()">×</button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this user?
+                </div>
+                <div class="modal-footer">
+                     <form id="deleteForm" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success" id="confirm">Confirm</button>
+                        <button type="button" class="btn btn-default" id="cancel" onclick="closeForm()">Cancel</button>
+                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        function openForm(e) {
+            const url = e.target.dataset.url
+            console.log(url);
+            const deleteForm = document.getElementById("deleteForm");
+            deleteForm.action = url
+            console.log(deleteForm)
+            document.getElementById("myForm").style.display = "block";
+        }
+
+        function closeForm() {
+            document.getElementById("myForm").style.display = "none";
+        }
+
+</script>
+{% endblock %}

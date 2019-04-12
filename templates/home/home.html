@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<title>Realty Trader</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% load  static %}
+<link rel="stylesheet" href="{% static 'css/w3.css' %}">
+<link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    body, h1, h2, h3, h4, h5, h6 {
+        font-family: "Raleway", Arial, Helvetica, sans-serif
+    }
+
+    .myLink {
+        display: none
+    }
+</style>
+<body class="w3-light-grey">
+
+<!-- Navigation Bar -->
+<div class="w3-bar w3-white w3-border-bottom w3-large">
+    <div class="left-menu">
+
+
+        <div class="left-menu setImg">
+            <img class="w3-image" src="{% static 'images/logo.png' %}">
+        </div>
+        <a href="{% url 'home' %}" class="w3-bar-item w3-button w3-mobile w3-padd">Home</a>
+        <a href="{% url 'searchProperty' %}" class="w3-bar-item w3-button w3-mobile  w3-padd">Search Property</a>
+        <a href="{% url 'advertiseProperty' %}" class="w3-bar-item w3-button w3-mobile  w3-padd">Advertise Property</a>
+        <a href="{% url 'contact' %}" class="w3-bar-item w3-button w3-mobile  w3-padd">Contact Us</a>
+        <a href="{% url 'aboutus' %}" class="w3-bar-item w3-button w3-mobile  w3-padd">About Us</a>
+    </div>
+    <div class="right-menu">
+        <a href="{% url 'signin' %}" class="w3-bar-item w3-button w3-light-grey w3-mobile w3-padd">SignIn/Register</a>
+    </div>
+</div>
+
+<!-- Header -->
+<header class="w3-display-container w3-content w3-hide-small" style="max-width:1500px">
+
+    <img class="w3-image" src="{% static 'images/b1.jpg' %}" alt="London" width="1500" height="700">
+    <div class="w3-display-middle" style="width:50%">
+        <div class="w3-bar w3-black">
+            <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Buy');"><i
+                    class="fa fa-building-o w3-margin-right"></i>Buy
+            </button>
+            <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Sell');"><i
+                    class="fa fa-building w3-margin-right"></i>Sell
+            </button>
+            <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Rental');"><i
+                    class="fa fa-home w3-margin-right"></i>Rental
+            </button>
+        </div>
+        {% block content %}
+        {% endblock %}
+        <!-- Tabs -->
+        <div id="Buy" class="w3-container w3-white w3-padding-16 myLink">
+            <h3>Smart Property Search</h3>
+            <p>Buy a property with us at affordable prices</p>
+            <div class="w3-row-padding" style="margin:0 -16px;">
+                <div class="w3-col">
+                    <div class="s12">
+                        <label>From</label>
+                        <input class="w3-input w3-border" type="text" placeholder="Enter address">
+                    </div>
+                </div>
+            </div>
+            <p>
+                <button class="w3-button w3-dark-grey">Search</button>
+            </p>
+        </div>
+        <div id="Sell" class="w3-container w3-white w3-padding-16 myLink">
+            <h3>Smart Property Search</h3>
+            <p>Sell a property with us and get the best prices</p>
+            <div class="w3-row-padding" style="margin:0 -16px;">
+                <div class="w3-col">
+                    <div class="s12">
+                        <label>From</label>
+                        <input class="w3-input w3-border" type="text" placeholder="Enter address">
+                    </div>
+                </div>
+            </div>
+            <p>
+                <button class="w3-button w3-dark-grey">Search</button>
+            </p>
+        </div>
+        <div id="Rental" class="w3-container w3-white w3-padding-16 myLink">
+            <h3>Best Property Rental</h3>
+            <p>Get 10% discount with us</p>
+            <div class="w3-row-padding" style="margin:0 -16px;">
+                <div class="w3-col">
+                    <div class="s12">
+                        <label>From</label>
+                        <input class="w3-input w3-border" type="text" placeholder="Enter address">
+                    </div>
+                </div>
+            </div>
+            <p>
+                <button class="w3-button w3-dark-grey">Search Availability</button>
+            </p>
+        </div>
+
+    </div>
+
+</header>
+
+<!-- Page content -->
+<div class="w3-content content" style="max-width:1100px;">
+
+    <!-- Explore Nature -->
+    <div class="w3-container heading-color">
+        <h2> Trending Properties</h2>
+    </div>
+    <div class="w3-row-padding">
+        {% for content in object %}
+            <div class="w3-quarter w3-margin-bottom">
+                <img class="w3-image setImgHeight" src="{{ content.propertyImage.url}}">
+                <a href="{% url 'propertyDetail' %}" class="w3-bar-item w3-button w3-mobile w3-padd">More Details</a>
+            </div>
+        {% endfor %}
+    </div>
+    <div><h2>Sports Equipments</h2>
+        <a href="{% url 'sportequip' %}" class="w3-bar-item w3-button w3-mobile w3-padd">Equipment List</a>
+    </div>
+</div>
+<!-- End page content -->
+
+
+<!-- Footer -->
+<footer class="w3-container w3-center w3-opacity w3-margin-bottom">
+    <h5>Find Us On</h5>
+    <div class="w3-xlarge w3-padding-16">
+        <i class="fa fa-facebook-official w3-hover-opacity"></i>
+        <i class="fa fa-instagram w3-hover-opacity"></i>
+        <i class="fa fa-snapchat w3-hover-opacity"></i>
+        <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+        <i class="fa fa-twitter w3-hover-opacity"></i>
+        <i class="fa fa-linkedin w3-hover-opacity"></i>
+    </div>
+</footer>
+
+<script>
+    // Tabs
+    function openLink(evt, linkName) {
+        var i, x, tablinks;
+        x = document.getElementsByClassName("myLink");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < x.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+        }
+        document.getElementById(linkName).style.display = "block";
+        evt.currentTarget.className += " w3-red";
+    }
+
+    // Click on the first tablink on load
+    document.getElementsByClassName("tablink")[0].click();
+</script>
+
+</body>
+</html>

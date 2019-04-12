@@ -1,0 +1,37 @@
+{% extends 'home/user/userBase.html' %}
+{% block user %}
+
+    <section class="content-header">
+    <div>
+        <div>
+            <a href="{% url 'roles' %}" class="btn btn-primary"><i class="fas fa-long-arrow-alt-left"></i> Back</a>
+        </div>
+        <div>
+            {% if not isEdit %}
+                <h3>Add New Role</h3>
+            {% else %}
+                <h3>Update Role</h3>
+            {% endif %}
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    </section>
+    <div class="row whiteBg">
+            <form method="post" {% if isEdit %} action="/roles/edit/{{ id }}/" {% else %} action="/roles/add/" {% endif %}>
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="float-left col-md-2">
+                        {{ field.label_tag }}
+                    </div>
+                    <div class="form-group float-left col-md-10">
+                        {{ field }}
+                    </div>
+                {% endfor %}
+                <div class="clearfix"></div>
+                <div class="float-left col-md-2"></div>
+                <div class="form-group float-left col-md-10">
+                    <input type="submit" class="btn btn-success" value="Submit">
+                </div>
+            </form>
+    </div>
+{% endblock %}

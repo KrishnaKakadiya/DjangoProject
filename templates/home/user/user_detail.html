@@ -1,0 +1,9 @@
+{% extends 'home/user/userBase.html' %}
+
+{% block user %}
+<h1>User Details</h1>
+<h2>Name: {{object.first_name}} {{ object.last_name }}</h2>
+Email: {{ object.email }}
+
+
+{% endblock %}
